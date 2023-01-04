@@ -4,7 +4,7 @@ import constants
 
 
 def generate_sequence(direction, rotation):
-    return direction, direction, direction@rotation, direction
+    return direction, direction, direction @ rotation, direction
 
 
 def place_block(board, position, direction, rotation):
@@ -19,5 +19,13 @@ def place_block(board, position, direction, rotation):
         temp_board[temp_pos[0]][temp_pos[1]][temp_pos[2]] = 1
     board += temp_board
     return True
+
+def remove_block(board, position, direction, rotation):
+    temp_pos = np.asarray(position)
+    board[temp_pos[0]][temp_pos[1]][temp_pos[2]] = 0
+    sequence = generate_sequence(direction, rotation)
+    for step in sequence:
+        temp_pos += step
+        board[temp_pos[0]][temp_pos[1]][temp_pos[2]] = 0
 
 
